@@ -1,0 +1,72 @@
+# What is Volatile Memory?
+  Volatile memory stores data temporarily while a system is running.
+
+# Primary Example: RAM (Random Access Memory).
+# Key Characteristics:
+  Data is lost when the system is powered off or restarted.
+  Contains critical forensic artifacts like running processes, open files, and encryption keys.
+
+# Why is Volatile Memory Important in DFIR?
+  Provides a real-time snapshot of system activity.
+  Captures evidence that disappears after shutdown (e.g., malware, decrypted data).
+  Essential for detecting fileless attacks (malware running only in memory).
+
+# Memory Hierarchy (Fastest to Slowest)
+  CPU Registers – Extremely fast, minimal storage.
+  CPU Cache – Faster than RAM, stores frequently accessed data.
+  RAM (Main Memory) – Stores active programs and OS data.
+  Disk Storage (HDD/SSD) – Persistent but slower.
+
+# Virtual Memory & Swap Space
+  Virtual Memory: OS assigns virtual addresses mapped to physical RAM or disk.
+  Swap Space (Pagefile in Windows, Swap Partition in Linux):
+    Used when RAM is full.
+    Temporarily stores inactive RAM data on disk.
+    Can contain forensic artifacts (e.g., fragments of decrypted data).
+
+# RAM Structure
+  Kernel Space: Reserved for OS (drivers, system processes).
+  User Space: Contains application processes (each has its own protected region).
+  Stack: Stores function calls, local variables.
+  Heap: Dynamic memory allocation (e.g., encryption keys, buffers).
+  Executable (.text): Contains program code.
+  Data Sections: Global variables, constants.
+
+# RAM Forensics and Memory Dumps
+  What is a Memory Dump?
+    A snapshot of RAM at a specific time.
+    Captures running processes, network connections, and decrypted data.
+
+# How Memory Dumps Are Created  
+  Windows:
+    Tools: WinPmem, FTK Imager, Sysinternals RAMMap.
+    Files: MEMORY.DMP (crash dumps), hiberfil.sys (hibernation file).
+  Linux/macOS:
+    Tools: LiME (Linux Memory Extractor), dd (with /dev/mem access).
+
+Type	                      Description	                              Use Case
+Full Memory Dump	          Captures all RAM (kernel + user space).	  Complete forensic analysis.
+Process Dump	              Captures a single process’s memory.	      Malware reverse engineering.
+Pagefile/Swap Analysis	    Extracts RAM data stored on disk.	        Recovering swapped-out artifacts.
+
+# Challenges in Memory Acquisition
+  Anti-Forensics Techniques:
+    DKOM (Direct Kernel Object Manipulation): Hides processes by altering kernel structures.
+    Process Hollowing: Replaces legitimate process memory with malicious code.
+    API Hooking: Intercepts system calls to hide malware.
+    Memory Patching: Modifies memory to evade detection.
+    Encrypted Payloads: Only decrypts in memory at runtime.
+
+# Memory-Based Threat Indicators
+  Common Malicious Activities in Memory
+Technique	              Description	                                              MITRE ATT&CK ID
+Process Hollowing	      Replaces a trusted process’s memory with malware.	        T1055
+DLL Injection	          Injects malicious DLL into a legitimate process.	        T1055.001
+API Hooking	            Intercepts system calls to manipulate behavior.	          T1179
+Fileless Malware	      Runs entirely in memory (no disk traces).	                T1059, T1086
+Credential Theft	      Tools like Mimikatz extract passwords from RAM.           T1003
+
+# Lateral Movement via Memory Artifacts
+  PsExec (T1021.002): Remote command execution.
+  WinRM (T1021.006): PowerShell remoting.
+  WMI (T1047): Executes commands remotely.
