@@ -1,0 +1,55 @@
+# What is DFIR?
+  Digital Forensics & Incident Response:
+    Forensics: Collecting and analyzing digital evidence.
+    Incident Response: Containing and mitigating cyber threats.
+
+  Key DFIR Concepts
+    Artifacts: Evidence of activity (e.g., registry keys, logs).
+    Evidence Preservation:
+      Write-protect original evidence.
+      Analyze copies to avoid contamination.
+    Chain of Custody: Track evidence handling to maintain integrity.
+    Order of Volatility: Collect most volatile data first (RAM → Disk).
+    Timeline Creation: Chronological reconstruction of events.
+
+# Essential DFIR Tools
+Tool	                  Purpose	                                        Platform
+Volatility	            Memory forensics (Windows/Linux).	              Cross-platform
+KAPE	                  Rapid artifact collection & parsing.	          Windows
+Autopsy	                Disk forensics & timeline analysis.	            Cross-platform
+Redline	                Live system forensic analysis.	                Windows
+Velociraptor	          Endpoint monitoring & response.	                Cross-platform
+
+# Incident Response Process (PICERL/NIST)
+  Preparation
+    Train teams, deploy tools, establish protocols.
+  Identification
+    Detect and analyze incidents (memory forensics helps here).
+  Containment
+    Isolate affected systems (short-term & long-term fixes).
+  Eradication
+    Remove threats (e.g., malware, attacker access).
+  Recovery
+    Restore systems to normal operation.
+  Lessons Learned
+    Document findings, improve defenses
+
+# NIST Equivalent Steps
+  Preparation → Same.
+  Detection & Analysis → Identification.
+  Containment, Eradication, Recovery → Combined.
+  Post-Incident Activity → Lessons Learned.
+
+# Memory Forensics is critical for detecting live threats.
+
+# DFIR combines forensics and cybersecurity to respond to incidents.
+
+# Tools like Volatility & KAPE automate evidence collection.
+
+#Follow PICERL/NIST for structured incident response.
+
+# Flag from Exercise:
+  THM{m3mory_analyst_g00d_job}
+
+# Timeline Creation Flag:
+  THM{DFIR_REPORT_DONE}
